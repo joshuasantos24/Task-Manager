@@ -43,12 +43,16 @@ android {
 dependencies {
 
     implementation("androidx.compose.ui:ui:1.3.1")
+    implementation("androidx.navigation:navigation-compose:2.5.3")
     implementation("androidx.compose.material:material:1.3.1")
 
     implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.4.1")
+    implementation("androidx.lifecycle:lifecycle-runtime-compose:2.6.2")
+    implementation("androidx.compose.runtime:runtime-livedata:1.6.0")
 
-    implementation("androidx.room:room-runtime:2.4.2")
-    kapt("androidx.room:room-compiler:2.4.2")
+    implementation(libs.androidx.room.runtime)
+    kapt(libs.androidx.room.compiler)
+    implementation ("androidx.room:room-ktx:2.6.1")
 
     implementation("androidx.work:work-runtime-ktx:2.7.1")
 
