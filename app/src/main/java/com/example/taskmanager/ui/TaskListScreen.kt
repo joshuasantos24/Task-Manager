@@ -30,24 +30,65 @@ fun TaskListScreen(viewModel: TaskViewModel, navController: NavController) {
             modifier = Modifier.fillMaxSize()
         ) {
             items(taskList) { task ->
-                TaskItem(task, viewModel)
+                TaskItem(task, viewModel, navController)
             }
         }
     }
 }
 
 @Composable
-fun TaskItem(task: Task, viewModel: TaskViewModel) {
+fun TaskItem(task: Task, viewModel: TaskViewModel, navController: NavController) {
+    var showDialog by remember { mutableStateOf(false) }
+
+    if (showDialog) {
+        AlertDialog(
+            onDismissRequest = { showDialog = false },
+            title = { Text("Confirmar eliminación") },
+            text = { Text("¿Estás seguro que deseas eliminar esta tarea?") },
+            confirmButton = {
+                TextButton(onClick = {
+                    viewModel.deleteTask(task)
+                    showDialog = false
+                }) {
+                    Text("Sí")
+                }
+            },
+            dismissButton = {
+                TextButton(onClick = { showDialog = false }) {
+                    Text("Cancelar")
+                }
+            }
+        )
+    }
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(8.dp)
-            .clickable { /* Navegar a editar tarea */ },
+            .padding(8.dp),
         elevation = 4.dp
     ) {
         Column(Modifier.padding(16.dp)) {
-            Text(text = task.title, style = MaterialTheme.typography.h6)
+            Row(
+                modifier = Modifier.fillMaxWidth(),
+                horizontalArrangement = Arrangement.SpaceBetween
+            ) {
+                Text(text = task.title, style = MaterialTheme.typography.h6)
+                Row {
+                    TextButton(onClick = {
+                        navController.navigate("editTask/${task.id}")
+                    }) {
+                        Text("Editar")
+                    }
+                    TextButton(onClick = {
+                        showDialog = true
+                    }) {
+                        Text("Eliminar", color = MaterialTheme.colors.error)
+                    }
+                }
+            }
+            Spacer(modifier = Modifier.height(4.dp))
             Text(text = task.description)
         }
     }
 }
+
