@@ -80,6 +80,7 @@ fun TaskItem(task: Task, viewModel: TaskViewModel, navController: NavController)
         )
     }
 
+
     Card(
         modifier = Modifier
             .fillMaxWidth()
@@ -150,3 +151,5 @@ fun PriorityBadge(priority: Int) {
         )
     }
 }
+
+
