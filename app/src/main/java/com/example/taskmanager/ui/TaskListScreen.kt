@@ -132,7 +132,6 @@ fun TaskItem(task: Task, viewModel: TaskViewModel, navController: NavController)
             Spacer(modifier = Modifier.height(8.dp))
 
             Column {
-                Text(text = task.title, style = MaterialTheme.typography.h6)
                 Text(text = "Creado: $formattedDate", style = MaterialTheme.typography.caption)
             }
         }
