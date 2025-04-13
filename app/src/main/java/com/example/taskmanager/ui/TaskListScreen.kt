@@ -1,6 +1,3 @@
-
-
-
 package com.example.taskmanager.ui
 
 import androidx.compose.foundation.background
@@ -19,6 +16,8 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.text.font.FontWeight
+import java.text.SimpleDateFormat
+import java.util.*
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import com.example.taskmanager.data.Task
@@ -80,6 +79,9 @@ fun TaskItem(task: Task, viewModel: TaskViewModel, navController: NavController)
         )
     }
 
+    val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
+    val formattedDate = dateFormat.format(Date(task.createdAt))
+
 
     Card(
         modifier = Modifier
@@ -125,6 +127,13 @@ fun TaskItem(task: Task, viewModel: TaskViewModel, navController: NavController)
                         tint = MaterialTheme.colors.error
                     )
                 }
+            }
+
+            Spacer(modifier = Modifier.height(8.dp))
+
+            Column {
+                Text(text = task.title, style = MaterialTheme.typography.h6)
+                Text(text = "Creado: $formattedDate", style = MaterialTheme.typography.caption)
             }
         }
     }
