@@ -15,6 +15,7 @@ class TaskViewModel(application: Application) : AndroidViewModel(application) {
     }
 
     fun updateTask(task: Task) = viewModelScope.launch {
+        task.lastUpdated = System.currentTimeMillis()
         taskDao.updateTask(task)
     }
 

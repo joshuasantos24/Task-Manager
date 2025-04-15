@@ -9,5 +9,6 @@ data class Task(
     val title: String,
     val description: String,
     val priority: Int,
-    val createdAt: Long = System.currentTimeMillis()
+    val createdAt: Long = System.currentTimeMillis(),
+    var lastUpdated: Long = System.currentTimeMillis()
 )

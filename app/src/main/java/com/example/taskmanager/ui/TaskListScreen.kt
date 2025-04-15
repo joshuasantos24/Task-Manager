@@ -81,6 +81,7 @@ fun TaskItem(task: Task, viewModel: TaskViewModel, navController: NavController)
 
     val dateFormat = SimpleDateFormat("dd/MM/yyyy HH:mm", Locale.getDefault())
     val formattedDate = dateFormat.format(Date(task.createdAt))
+    val lastUpdatedDate = java.text.SimpleDateFormat("dd/MM/yyyy HH:mm").format(Date(task.lastUpdated))
 
 
     Card(
@@ -133,6 +134,7 @@ fun TaskItem(task: Task, viewModel: TaskViewModel, navController: NavController)
 
             Column {
                 Text(text = "Creado: $formattedDate", style = MaterialTheme.typography.caption)
+                Text("Última actualización: $lastUpdatedDate", style = MaterialTheme.typography.caption)
             }
         }
     }
